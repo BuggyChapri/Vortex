@@ -1,4 +1,4 @@
-# **Chaotic Adventures** 🎮🌟  
+# **Chaotic Adventures** 🎮🌟   
 _A fast-paced 2D action game with unpredictable twists!_  
 
 Originally made for a **2D Game Jam** _(Ranked 7th! 🏅)_  
