@@ -1,0 +1,149 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/New Piskel.png" type="Texture" id=1]
+[ext_resource path="res://scripts/player.gd" type="Script" id=2]
+[ext_resource path="res://fonts/mario_kart_ds/Mario-Kart-DS.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://sounds/Laser_Shoot85.wav" type="AudioStream" id=4]
+[ext_resource path="res://scripts/Camera2D.gd" type="Script" id=5]
+[ext_resource path="res://camshake'.tscn" type="PackedScene" id=6]
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 9.21954
+
+[sub_resource type="DynamicFont" id=4]
+size = 15
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 14
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 14
+font_data = ExtResource( 3 )
+
+[node name="player" type="KinematicBody2D"]
+position = Vector2( 183, 107 )
+script = ExtResource( 2 )
+
+[node name="shoot" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 0, -1 )
+rotation = 1.57079
+stream = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1 )
+rotation = 1.57079
+shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -3 )
+texture = ExtResource( 1 )
+offset = Vector2( 0, 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+script = ExtResource( 5 )
+
+[node name="camshake" parent="Camera2D" instance=ExtResource( 6 )]
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 0, -1 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enable = true
+
+[node name="health" type="Label" parent="CanvasLayer"]
+margin_left = 182.0
+margin_top = 119.0
+margin_right = 247.0
+margin_bottom = 133.0
+custom_fonts/font = SubResource( 4 )
+text = "health "
+
+[node name="powerup" type="Label" parent="CanvasLayer"]
+margin_left = 182.0
+margin_top = 119.0
+margin_right = 247.0
+margin_bottom = 133.0
+custom_fonts/font = SubResource( 4 )
+text = "esf"
+
+[node name="score" type="Label" parent="CanvasLayer"]
+margin_left = 183.0
+margin_top = 107.0
+margin_right = 227.0
+margin_bottom = 120.0
+custom_fonts/font = SubResource( 2 )
+text = "score"
+
+[node name="timer" type="Label" parent="CanvasLayer"]
+margin_left = 188.0
+margin_top = 96.0
+margin_right = 232.0
+margin_bottom = 109.0
+custom_fonts/font = SubResource( 2 )
+text = "timer"
+
+[node name="poweup_heading" type="Label" parent="CanvasLayer"]
+margin_left = 183.0
+margin_top = 107.0
+margin_right = 223.0
+margin_bottom = 121.0
+custom_fonts/font = SubResource( 5 )
+text = "player buff"
+align = 1
+valign = 1
+
+[node name="enemy_powerup" type="Label" parent="CanvasLayer"]
+margin_left = 180.0
+margin_top = 133.0
+margin_right = 220.0
+margin_bottom = 147.0
+custom_fonts/font = SubResource( 6 )
+text = "esf"
+align = 1
+valign = 1
+
+[node name="enemy_buff_heading" type="Label" parent="CanvasLayer"]
+margin_left = 184.0
+margin_top = 97.0
+margin_right = 258.0
+margin_bottom = 111.0
+custom_fonts/font = SubResource( 7 )
+text = "enemy buff"
+align = 1
+valign = 1
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 2.0
+spread = 144.61
+gravity = Vector2( 0, 0 )
+initial_velocity = 40.0
+initial_velocity_random = 1.0
+angular_velocity = 30.0
+angular_velocity_random = 1.0
+radial_accel = 10.0
+radial_accel_random = 1.0
+tangential_accel = 9.71
+tangential_accel_random = 1.0
+damping = 1.0
+angle = 251.7
+scale_amount = 1.4
+color = Color( 0.0431373, 0.929412, 0.0941176, 1 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
